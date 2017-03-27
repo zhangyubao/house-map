@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>地图找房</title>
+		<script type="text/javascript" src="http://maps.google.cn/maps/api/js?key=AIzaSyA1wj36Jr6W46WQ1JpQsoQZxHMQm5pEQDs"></script>
+		<!--List.js资源库-->
+		<script src="http://listjs.com/assets/javascripts/list.min.js"></script>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../mapmarker.jquery.js"></script>
+		<script type="text/javascript" src="js/house.js"></script>
+		<script type="text/javascript" src="js/marker.js">
+		</script>
+
+		<link rel="stylesheet" href="../map.css" />
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+//				var myMarkers = {
+//					"markers": [
+//						{ 'price': '66.9', 'listingname': '5885 WALKER AVENUE', 'count': '32' },
+//						{ 'price': '56.9', 'listingname': '4479 W RIVER ROAD', 'count': '32' },
+//						{ 'price': '58.9', 'listingname': '4479 W RIVER ROAD', 'count': '32' },
+//						{ 'price': '78.9', 'listingname': '5885 WALKER AVENUE', 'count': '32' },
+//						{ 'price': '68.9', 'listingname': 'Sorel, Qc, Canada', 'count': '32' },
+//						{ 'price': '86.9', 'listingname': 'Drummondville, Qc, Canada', 'count': '32' },
+//						{ 'price': '84.9', 'listingname': 'Granby, Qc, Canada', 'count': '32' },
+//						{ 'price': '83.9', 'listingname': 'Mirabel, Qc, Canada', 'count': '32' },
+//						{ 'price': '82.9', 'listingname': 'Vaudreuil-Dorion, Qc, Canada', 'count': '32' },
+//						{ 'price': '83.9', 'listingname': 'Hawkesbury, Qc, Canada', 'count': '32' },
+//						{ 'price': '68.9', 'listingname': 'Alexandria, Qc, Canada', 'count': '32' },
+//						{ 'price': '28.9', 'listingname': 'Rigaud, Qc, Canada', 'count': '32' },
+//						{ 'price': '91.9', 'listingname': 'Terrebome, Qc, Canada', 'count': '32' }
+//					]
+//				};
+				
+				var markers = [];
+				$.get('http://www.realtoraccess.com/app/get/shares/', {
+						"page": "1",
+						"stype": "listing1",
+					},
+					function(data, status) {
+						var houseArray = JSON.parse(data).listing1;
+						for(var i = 0; i < houseArray.length; i++) {
+							var obj = houseArray[i];
+							var marker = new Marker(obj.listingname, obj.price);
+							markers.push(marker);
+						}
+						var json = "{\"listing1\":" + JSON.stringify(markers) + "}";
+						var datamarkers = JSON.parse(json);
+						$("#map").mapmarker({ zoom: 11, center: 'Vancouver', markers: datamarkers });
+					});
+//					$("#map").mapmarker({ zoom: 5, center: 'Vancouver'});
+			});
+		</script>
+
+	</head>
+
+	<body class='parent'>
+		<div class="container">
+			<aside class="houses" id="houses">
+				<input class="search" placeholder="房源名称/MSL" />
+				<button class="sort" data-sort="name">搜索</button>
+				<ul class="list"></ul>
+			</aside>
+			<div id="map" class="map"></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var housesList = [];
+		var options = {
+			valueNames: ['listingname', 'square', 'village', { attr: 'src', name: 'icon' }, { attr: 'href', name: 'detail_1' }, { attr: 'href', name: 'detail_2' }],
+			item: '<li><span><a class="detail_1"><img class="icon"/></a><div class="desc"><a class="detail_2"><p class="listingname">32 Saint-Charles Ouest</p></a><span><h5 class="price" style="color: #EA7865; font-size: 16px;float: right;">$1,289,000</h5><p class="square"></p></span><p class="village">林肯公园</p></div></span></li>'
+		};
+		var dataurl = 'http://www.realtoraccess.com/app/get/shares/';
+		$.get(dataurl, {
+				"page": "1",
+				"stype": "listing1",
+			},
+			function(data, status) {
+				var houseArray = JSON.parse(data).listing1;
+				for(var i = 0; i < houseArray.length; i++) {
+					var obj = houseArray[i];
+					var house = new House(obj.listingname, obj.bedroom + '室' + obj.toilet + '卫 | ' + obj.areas, obj.housetype, obj.url, obj.url, obj.imgurl[0]);
+					housesList.push(house);
+				}
+				new List('houses', options, housesList)
+			});
+	</script>
+
+</html>
