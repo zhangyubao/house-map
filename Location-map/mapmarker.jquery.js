@@ -1,5 +1,6 @@
 (function($) {
-	var ovalMarkers = [];
+	var map = null;
+	var geocoder　 = null;
 	$.fn.mapmarker = function(options) {
 		var opts = $.extend({}, $.fn.mapmarker.defaults, options);
 
@@ -21,15 +22,20 @@
 
 	function addMapMarker(map_element, zoom, center, markers) {
 
+		var infowindow = null;
+		var baloon_text = "";
 		var myOptions = {
 			zoom: zoom,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		}
-		var map = new google.maps.Map(map_element, myOptions);
-		var geocoder = new google.maps.Geocoder();
-		var infowindow = null;
-		var baloon_text = "";
-
+		if(map == null && 　geocoder == null) {
+			map = new google.maps.Map(map_element, myOptions);
+			geocoder = new google.maps.Geocoder();
+		}
+		google.maps.event.addListener(map, 'dragend', function() {
+//			console.log("============================dragend ============" + map.getCenter())
+			map.setCenter(map.getCenter());
+		});
 		geocoder.geocode({ 'address': center }, function(results, status) {
 			if(status == google.maps.GeocoderStatus.OK) {
 				map.setCenter(results[0].geometry.location);
@@ -37,11 +43,10 @@
 				console.log("Geocode was not successful for the following reason: " + status);
 			}
 		});
-
 		$.each(markers.listing1, function(i, the_marker) {
 			var label = the_marker.price;
-			console.error(the_marker.price);
-			address = the_marker.listingname;
+			var address = the_marker.listingname;
+//			console.log("___" + i + "____当前地址：-----" + address + "==========当前价格----" + label)
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({ "address": address }, function(results, status) {
 				if(status == 'OK') {
@@ -61,8 +66,7 @@
 							text: label
 						}
 					});
-					ovalMarkers.push(marker);
-//					google.maps.event.addListener(marker, 'click', function() {
+					google.maps.event.addListener(marker, 'click', function() {
 //						if(infowindow) {
 //							infowindow.close();
 //						}
@@ -72,11 +76,10 @@
 //						});
 //
 //						infowindow.open(map, marker);
-//					});
+					});
 				}
 
 			});
-
 
 		});
 	}
