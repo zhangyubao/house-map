@@ -1,0 +1,167 @@
+html,
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	border: none;
+	background-color: transparent;
+	background: transparent;
+}
+
+input {
+	border: solid 1px #CCCCCC;
+	border-radius: 5px;
+	padding: 7px 14px;
+	margin-bottom: 10px
+}
+
+input:focus {
+	outline: none;
+	border-color: #aaa;
+}
+
+li {
+	list-style-type: none;
+}
+
+a {
+	target: '_blank';
+	color: #0000FF;
+}
+
+.parent {
+	display: flex;
+	flex-direction: row;
+}
+
+.container {
+	overflow: hidden;
+	flex: 1;
+	display: flex;
+}
+
+.houses {
+	background: white;
+	width: 450px;
+}
+
+.map {
+	flex: 1;
+	margin: 0px;
+}
+
+
+/*搜索功能样式表*/
+
+.search {
+	border-radius: 3px;
+	width: 220px;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding: 5px;
+}
+
+.sort {
+	margin-top: 10px;
+	margin-left: 10px;
+	padding: 3px 0px 3px 10px;
+	width: 70px;
+	height: 30px;
+	border-radius: 3px;
+	border: none;
+	color: #FFF;
+	text-align: center;
+	background-color: #00C700;
+}
+
+.sort:hover {
+	text-decoration: none;
+	background-color: #169C16;
+}
+
+.sort:focus {
+	outline: none;
+}
+
+.sort:after {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	content: "";
+	position: relative;
+	top: -10px;
+	right: -5px;
+}
+
+
+/*列表样式*/
+
+.list {
+	overflow: scroll;
+	height: inherit;
+	height: 100%;
+	font-family: sans-serif;
+	margin: 0;
+	padding: 10px 0 0;
+	border-bottom: gray;
+}
+
+.list>li {
+	display: block;
+	background-color: white;
+	padding: 10px;
+	box-shadow: inset 0 1px 0 #EEEEEE;
+}
+
+
+/*列表房源item样式*/
+
+.icon {
+	margin-left: 10px;
+	width: 120px;
+	height: 85px;
+	padding: 0px;
+	margin-right: 10px;
+	float: left;
+}
+
+.square {
+	color: gray;
+	font-size: 13px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+}
+
+.village {
+	color: gray;
+	font-size: 13px;
+	margin-top: 10px;
+}
+
+.listingname {
+	margin-bottom: 0px;
+	color: blue;
+	font-size: 15px;
+	margin-top: 0px;
+	padding: 0px;
+	overflow: hidden;
+	display: block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.split {
+	height: 1px;
+}
+
+.img-thumbnail{
+	width: 200px;
+	height: 140px;
+}

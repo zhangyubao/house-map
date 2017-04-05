@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>地图定位</title>
+		<script type="text/javascript" src="http://maps.google.cn/maps/api/js?key=AIzaSyA1wj36Jr6W46WQ1JpQsoQZxHMQm5pEQDs"></script>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/location.js"></script>
+
+		<script type="text/javascript">
+
+			$(document).ready(function() {
+				//参数说明  地图中心点(与地址一致或自己设定)/价格/房源地址/地图放大倍数默认10
+				$("#map").mapmarker('4807 PATRICK PLACE', '$289,000', '4807 PATRICK PLACE',12);
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<div id="map" style="width: 750px; height: 850px"></div>
+	</body>
+
+</html>

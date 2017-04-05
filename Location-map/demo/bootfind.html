@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>地图找房</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript" src="http://maps.google.cn/maps/api/js?key=AIzaSyA1wj36Jr6W46WQ1JpQsoQZxHMQm5pEQDs"></script>
+		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../mapmarker.jquery.js"></script>
+		<script type="text/javascript" src="js/house.js"></script>
+		<script type="text/javascript" src="js/marker.js"></script>
+
+		<link rel="stylesheet" href="map.css" />
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var currentPage = 1;
+				var dataurl = 'http://www.realtoraccess.com/app/get/shares/';
+				var defaultmarkers = [];
+				$.get(dataurl, {
+						"page": currentPage,
+						"stype": "listing1",
+					},
+					function(data, status) {
+						var houseArray = JSON.parse(data).listing1;
+						for(var i = 0; i < houseArray.length; i++) {
+							var obj = houseArray[i];
+							
+						}
+						
+//						var housesList = [];
+//						for(var i = 0; i < houseArray.length; i++) {
+//							var obj = houseArray[i];
+//							var marker = new Marker(obj.listingname, obj.price, obj.url);
+//							var house = new House(obj.listingname, obj.bedroom + '室' + obj.toilet + '卫 | ' + obj.areas, obj.housetype, obj.url, obj.url, obj.imgurl[0], obj.price);
+//							defaultmarkers.push(marker);
+//							housesList.push(house);
+//						}
+//						var json = "{\"listing1\":" + JSON.stringify(defaultmarkers) + "}";
+//						var jsonmarkers = JSON.parse(json);
+						$("#map").mapmarker({ zoom: 12, center: 'Vancouver', markers: defaultmarkers });
+					});
+			});
+		</script>
+	</head>
+
+	<body class='parent'>
+		<div class="container">
+			<aside class="houses">
+				<ul class="listview image">
+					<img  src="img/house-1.jpg" class="img-thumbnail"/>
+					<h4 class=""></h4>
+					<p class=""></p>
+				</ul>
+			</aside>
+			<div id="map" class="map"></div>
+		</div>
+
+	</body>
+
+</html>

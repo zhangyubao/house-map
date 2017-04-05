@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 980px;
+            margin: 50px auto;
+            border: 1px solid #000;
+        }
+        .nav{
+            float: left;
+            width: 200px;
+            height: 500px;
+            /*box-sizing: border-box;*/
+            padding: 20px;
+            border: 1px solid #000;
+        }
+        .nav ul{
+            /*float: left;*/
+            list-style: none;
+            width: 100%;
+            height: 100%;
+            background-color: red;
+            overflow: scroll;
+            /*padding: 10px;*/
+        }
+        li{
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            margin: 10px auto;
+
+        }
+        .show{
+            line-height: 300px;
+            text-align: center;
+            float: left;
+            width: 300px;
+            height: 300px;
+            background-color: #eee;
+            position: relative;
+        }
+        .info{
+            width: 100%;
+            height: 100%;
+        }
+        .fuck{
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <ul>
+            <li>black</li>
+            <li>fuck</li>
+            <li>bitch</li>
+            <li>low</li>
+            <li>wtf</li>
+            <li>give me five</li>
+            <li>hello world</li>
+            <li>javascript</li>
+        </ul>
+
+    </div>
+    <div class="show">
+        <div class="fuck">X</div>
+        <div class="info"></div>
+    </div>
+</div>
+<script src='jquery-2.1.4.js'></script>
+<script>
+    $("li").click(function () {
+        $('.show').show();
+        var info=$(this).text();
+        $('.info').html(info);
+    })
+    $(".fuck").click(function () {
+        $(this).parent().hide();
+    })
+</script>
+</body>
+</html>
