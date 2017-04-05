@@ -33,7 +33,7 @@
 			geocoder = new google.maps.Geocoder();
 		}
 		google.maps.event.addListener(map, 'dragend', function() {
-//			console.log("============================dragend ============" + map.getCenter())
+			//console.log("============================dragend ============" + map.getCenter())
 			map.setCenter(map.getCenter());
 		});
 		geocoder.geocode({ 'address': center }, function(results, status) {
@@ -46,7 +46,8 @@
 		$.each(markers.listing1, function(i, the_marker) {
 			var label = the_marker.price;
 			var address = the_marker.listingname;
-//			console.log("___" + i + "____当前地址：-----" + address + "==========当前价格----" + label)
+			var durl = the_marker.detail_url;
+//			console.log("___" + i + "____当前地址：-----" + address + "======" + durl + "====当前价格----" + label);
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({ "address": address }, function(results, status) {
 				if(status == 'OK') {
@@ -67,15 +68,9 @@
 						}
 					});
 					google.maps.event.addListener(marker, 'click', function() {
-//						if(infowindow) {
-//							infowindow.close();
-//						}
-//
-//						infowindow = new google.maps.InfoWindow({
-//							content: label
-//						});
-//
-//						infowindow.open(map, marker);
+						$(".house_detail").show().fadeIn(500);
+//						$('#detailID').setAttribute("src","http://www.baidu.com")
+						$.get(durl, function(data) {});
 					});
 				}
 
